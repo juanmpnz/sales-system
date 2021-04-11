@@ -14,7 +14,6 @@ export default function Tables({title}) {
         <div className="w-full mb-12 px-4">
           <CardTable title={title} data={ title !== "usuarios" ? users : sales}/>
         </div>
-     
       </div>
     </>
   );
