@@ -1,16 +1,21 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-
- 
+import React, {useContext, useEffect} from "react";import { Switch, Route, Redirect } from "react-router-dom";
+import { UserContext } from "../index";
+import axios from "axios";
 // views
-
 import Login from "views/auth/Login.js";
  
-
 export default function Auth() {
+  const { setOffice } = useContext(UserContext);
+
+  useEffect(() => {
+     axios.get("/api/office")
+       .then((offices)=>{
+        setOffice(offices.data)
+     }) 
+  }, []);
+  
   return (
-    <>
-      
+    <>  
       <main>
         <section className="relative w-full h-full py-20 min-h-screen">
           <div
@@ -24,8 +29,7 @@ export default function Auth() {
             }}
           ></div>
           <Switch>
-            <Route path="/" exact component={Login} />
-            
+            <Route path="/" exact component={Login}/>       
             <Redirect from="/auth" to="/auth/login" />
           </Switch>
         

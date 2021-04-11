@@ -1,8 +1,6 @@
 import React from "react";
 
-// components
-
-export default function AddUser() {
+export default function AddUser({handleChange, office}) {
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
@@ -26,6 +24,8 @@ export default function AddUser() {
                     Nombre
                   </label>
                   <input
+                    onChange={handleChange}
+                    name="name"
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     defaultValue=""
@@ -41,7 +41,9 @@ export default function AddUser() {
                     Apellido
                   </label>
                   <input
-                    type="email"
+                  onChange={handleChange}
+                  name="lastname"
+                    type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     defaultValue=""
                   />
@@ -56,6 +58,8 @@ export default function AddUser() {
                     E-mail
                   </label>
                   <input
+                  onChange={handleChange}
+                  name="email"
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     defaultValue=""
@@ -71,15 +75,14 @@ export default function AddUser() {
                     Contraseña
                   </label>
                   <input
+                    onChange={handleChange}
+                    name="password"
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     defaultValue=""
                   />
-                </div>
-                
-                
-              </div>
-              
+                </div>                           
+              </div>       
               <div className="w-full lg:w-12/12 px-4">
                 <div className="relative w-full mb-3">
                 <label
@@ -88,11 +91,11 @@ export default function AddUser() {
                   >
                     Sucursal
                   </label>
-                  <input
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue=""
-                  />
+                  <select onChange={handleChange} name="office" id="office"  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                   {office.map((o,i)=>{
+                     return  <option key={i}value={o.id}>{o.officeName}</option>
+                   })}
+                  </select>
                 </div>
                 <br/>
               </div>

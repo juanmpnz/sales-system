@@ -35,6 +35,10 @@ Sale.init(
             allowNull: false,
             defaultValue: 0
         },
+        clientAddress:{
+            type: S.STRING,
+            allowNull: false,
+        },
         observations:{
             type: S.TEXT,
             allowNull: true,

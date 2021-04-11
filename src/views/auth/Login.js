@@ -1,8 +1,25 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, {useContext, useState} from "react";
+import { useHistory } from "react-router-dom";
+
+import { UserContext } from "../../index";
 
 export default function Login() {
+const { office } = useContext(UserContext);
 const history = useHistory()
+
+const [login, setLogin] = useState({
+  office:"",
+  email:"",
+  password:""
+})
+
+const handleChange = (e)=>{
+  e.preventDefault()
+  const value = e.target.value;
+  const name = e.target.name
+  setLogin({ ...login, [name]: value });
+}
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -14,13 +31,11 @@ const history = useHistory()
                   <h6 className="text-blueGray-500 text-sm font-bold">
                     Iniciar Sesión
                   </h6>
-                </div>
-            
+                </div>        
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
-              <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-           
-                <form>
+              <div className="flex-auto px-4 lg:px-10 py-10 pt-0">        
+              <form>
                 <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -29,12 +44,12 @@ const history = useHistory()
                       Seleccionar Sucursal
                     </label>
                  
-                    <select name="cars" id="cars"  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                    <option value="volvo">Moron</option>
-                    <option value="saab">Munro</option>
-                    <option value="mercedes">Palermo</option>
-                    <option value="audi">La Boca</option>
+                     <select onChange={handleChange} name="office" id="office"  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                   {office.map((o,i)=>{
+                     return  <option key={i}value={o.id}>{o.officeName}</option>
+                   })}
                   </select>
+ 
                   </div>
                   <div className="relative w-full mb-3">
                     <label
@@ -43,7 +58,9 @@ const history = useHistory()
                     >
                       Email
                     </label>
-                    <input
+                    <input 
+                       onChange={handleChange} 
+                       name="email" 
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
@@ -58,6 +75,8 @@ const history = useHistory()
                       Password
                     </label>
                     <input
+                       onChange={handleChange} 
+                       name="password" 
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"

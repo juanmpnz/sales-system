@@ -19,19 +19,23 @@ User.init(
         allowNull: false,
       },
     email: {
-      type: S.STRING,
+        type: S.STRING,
     }, 
     password: {
-      type: S.STRING,
-      allowNull: false,
+        type: S.STRING,
+        allowNull: false,
+    },
+    role:{
+        type: S.STRING,
+        allowNull: false,
     },
     salt: {
-      type: S.STRING,
+        type: S.STRING,
     },
   },
   {
-    sequelize: db,
-    modelName: "User",
+        sequelize: db,
+        modelName: "User",
   }
 );
 
