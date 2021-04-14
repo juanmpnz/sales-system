@@ -19,7 +19,7 @@ const Root = () => {
   const [office, setOffice] = useState([])
 
   return (
-    <UserContext.Provider value={{ users, setUsers }, {office, setOffice}}>
+    <UserContext.Provider value={{ users, setUsers,office, setOffice } }>
     <BrowserRouter>
     <Switch>
       <Route path="/admin" component={Admin} />   

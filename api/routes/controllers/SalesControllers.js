@@ -9,15 +9,22 @@ const createSale = (req,res,next)=>{
           res.status(201).send(sale);
         })
         .catch((e) => res.send(e));
-}
+    }
 
-const getAll =(req,res,next)=>{
-    Sale.findAll().then((sales)=>{
-        res.status(200).send(sales)
-    }).catch((e)=>e)
-}
+    const getIndividualSale= (req,res,next) =>{
+        Sale.findAll({where:{id: req.params.id}})
+        .then((link)=> res.send(link))
+        .catch((e) => res.send(e));
+    }
+
+    const getAll =(req,res,next)=>{
+        Sale.findAll().then((sales)=>{
+            res.status(200).send(sales)
+        }).catch((e)=>e)
+    }
 
 module.exports = {
     createSale,
-    getAll
+    getAll,
+    getIndividualSale
   };

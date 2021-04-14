@@ -2,7 +2,8 @@ import React from "react";
 import { useHistory} from "react-router-dom";
 import { createPopper } from "@popperjs/core";
 
-const NotificationDropdown = () => {
+const NotificationDropdown = ({type, id}) => {
+  console.log(id)
   const history= useHistory()
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -41,7 +42,7 @@ const NotificationDropdown = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
-          onClick={(e) => history.push("/selldetail")}
+          onClick={(e) => history.push("/admin/showsales/"+ id)}
         >
           Detalles
         </a>

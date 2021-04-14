@@ -29,6 +29,11 @@ User.init(
         type: S.STRING,
         allowNull: false,
     },
+    officeId:{
+      type: S.NUMBER,
+      allowNull: false,
+      defaultValue: 0
+    },
     salt: {
         type: S.STRING,
     },

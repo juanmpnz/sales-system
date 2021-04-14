@@ -1,4 +1,5 @@
 import React, {useState, useContext} from "react";
+import axios from "axios"
 
 // components
 import AddUser from "components/Cards/AddUser.js";
@@ -13,7 +14,7 @@ export default function AddUserContainer() {
   name:"",
   lastname:"", 
   role:"",
-  office:""
+  officeId:0
   })
 
   const handleChange = (e)=>{
@@ -23,12 +24,23 @@ export default function AddUserContainer() {
     setNewUser({ ...newUser, [name]: value });
   }
 
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    axios.post("/api/users/register", newUser)
+    .then((user)=>{
+      console.log("agregad@", user)
+    })
+    .catch((e)=>{
+      console.log(e)
+      return e
+    })
+  }
 
-  return (
+return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full lg:w-10/12 px-4">
-          <AddUser handleChange={handleChange} office={office}/>
+          <AddUser handleChange={handleChange} handleSubmit={handleSubmit} office={office}/>
         </div>
       </div>
     </>

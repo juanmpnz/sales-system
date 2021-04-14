@@ -1,18 +1,40 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios"
 
 // components
-
 import CardTable from "components/Cards/CardTable.js";
+import TableDropdown from "components/Dropdowns/TableDropdown.js";
 
 export default function Tables({title}) {
+  const history = useHistory()
+  const [users, setUsers] = useState([
+    {acciones:<TableDropdown type={title}/> 
+  }
+  ])
+  const [sales, setSales] = useState([ 
+ ])
 
-  const users = [{ id: 1, fecha: 'sales', codigo: '609P', factura:"744412", productoEntregado: "SI", restaCobrar:"$1050.00", acciones: "<TableDropdown/>" }, { id: 2, fecha: ' Barbarian', codigo: '401A', factura:"055225", productoEntregado: "NO", restaCobrar:"$210500.00",acciones:" <TableDropdown/> "}  ];
-  const sales = [{ id: 1, fecha: 'users', codigo: '609P', factura:"744412", productoEntregado: "SI", restaCobrar:"$1050.00", acciones: "<TableDropdown/>" }, { id: 2, fecha: ' Barbarian', codigo: '401A', factura:"055225", productoEntregado: "NO", restaCobrar:"$210500.00",acciones: "<TableDropdown/> "}  ];
+
+  useEffect(() => {
+
+    axios.get("/api/sales/")
+    .then((sales)=> {
+      console.log("sales then", sales.data[0])
+      setSales(sales.data )
+    })
+      
+    .catch((error)=>error)
+  
+  }, [])
+ 
+
+ console.log(sales)
   return (
     <>
       <div className="flex flex-wrap mt-4">
         <div className="w-full mb-12 px-4">
-          <CardTable title={title} data={ title !== "usuarios" ? users : sales}/>
+          <CardTable title={title} data={sales}/>
         </div>
       </div>
     </>

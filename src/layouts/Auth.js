@@ -1,18 +1,33 @@
-import React, {useContext, useEffect} from "react";import { Switch, Route, Redirect } from "react-router-dom";
+import React, {useContext, useEffect} from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { UserContext } from "../index";
 import axios from "axios";
 // views
 import Login from "views/auth/Login.js";
  
 export default function Auth() {
-  const { setOffice } = useContext(UserContext);
-
+  const { setOffice, setUsers, users } = useContext(UserContext);
+ 
   useEffect(() => {
+
      axios.get("/api/office")
        .then((offices)=>{
         setOffice(offices.data)
      }) 
-  }, []);
+      if(Object.entries(users).length){
+        axios
+        .get("/api/users/me")
+        .then((res) => res.data)
+        .then((user) => {
+          setUsers(user);
+        })
+        .catch(({ response }) => {
+          console.error(response);
+        });
+      } 
+  }, [setUsers]);
+
+  console.log(users)
   
   return (
     <>  

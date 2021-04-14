@@ -43,9 +43,7 @@ export default function AddSellContainer() {
 
   }
 
-  
-console.log(newSale)
-  return (
+return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full lg:w-10/12 px-4">

@@ -7,8 +7,8 @@ const getUsers = (req,res,next) =>{
 }
 
 const userRegister = (req,res,next)=>{
-    const {email,password,name,lastname} = req.body
-    User.create({email,password,name,lastname, role})
+    const {email,password,name,lastname,role,officeId} = req.body
+    User.create({email,password,name,lastname,role, officeId})
         .then((user) => {
           res.status(201).send(user);
         })
@@ -16,6 +16,7 @@ const userRegister = (req,res,next)=>{
 }
 
 const login = (req,res,next)=>{
+  console.log("login controller entro")
   return res.send(req.user)
 }
 

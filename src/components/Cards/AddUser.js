@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AddUser({handleChange, office}) {
+export default function AddUser({handleChange, handleSubmit ,office}) {
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
@@ -10,7 +10,7 @@ export default function AddUser({handleChange, office}) {
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-          <form>
+          <form onSubmit={handleSubmit}>
             <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
              Nuevo usuario
             </h6>
@@ -91,7 +91,8 @@ export default function AddUser({handleChange, office}) {
                   >
                     Sucursal
                   </label>
-                  <select onChange={handleChange} name="office" id="office"  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  <select  onChange={handleChange} name="officeId" id="office"  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  <option key="default" value={false}>Seleccionar</option>
                    {office.map((o,i)=>{
                      return  <option key={i}value={o.id}>{o.officeName}</option>
                    })}

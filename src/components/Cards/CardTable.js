@@ -30,36 +30,37 @@ createTheme('solarized', {
 const columns = [
   {
     name: 'Fecha',
-    selector: 'fecha',
+    selector: 'date',
     sortable: true,
   },
   {
     name: 'Codigo',
-    selector: 'codigo',
+    selector: 'code',
     sortable: true,
     right: true,
   },
   {
     name: 'Factura',
-    selector: 'factura',
+    selector: 'ticket',
     sortable: true,
     right: true,
   },
   {
     name: 'Producto Entregado',
-    selector: 'productoEntregado',
+    selector: 'delivered',
     sortable: true,
     right: true,
   },
   {
     name: 'Resta cobrar',
-    selector: 'restaCobrar',
+    selector: 'restPay',
     sortable: true,
     right: true,
   },
   {
     name: 'Acciónes',
-    selector: 'acciones',
+    cell: row => <div data-tag="allowRowEvents"><div style={{ fontWeight: "bold" }}><TableDropdown id={row.id}/></div></div>,
+
     sortable: true,
     right: true,
   },
@@ -68,17 +69,28 @@ const columns = [
 
 export default function CardTable({title, data}) {
 
+  const ActionComponent = ({  row, onClick  }) => {
+    const clickHandler = () => onClick(row);   
+  
+   return <button onClick={clickHandler}>Action</button>;
+  };
+
   return (
     <>
-  
         <DataTable
          title={`Listado de ${title}`}
          columns={columns}
          data={data}
          theme="solarized"
-        />
-       
-
+         allowOverflow={true}
+         highlightOnHover={true}
+         pointerOnHover={true}
+         responsive={true}
+         
+           
+     
+        />   
+      
     </>
   );
 }

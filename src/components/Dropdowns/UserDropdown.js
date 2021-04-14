@@ -1,7 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import { createPopper } from "@popperjs/core";
+import { useHistory } from "react-router-dom";
+import { UserContext } from "../../index";
+import axios from "axios";
 
 const UserDropdown = () => {
+  const {   setUsers   } = useContext(UserContext);
+  const history= useHistory()
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -15,6 +20,19 @@ const UserDropdown = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+
+  const handleLogout = async () => {
+    console.log("logout attempt...");
+    try {
+      await axios.post("/api/users/logout");
+      setUsers({});
+      console.log("logged out");
+      history.push("/");
+    } catch ({ response }) {
+      console.log(response.status, response.statusText);
+    }
+  };
+
   return (
     <>
       <a
@@ -28,11 +46,7 @@ const UserDropdown = () => {
       >
         <div className="items-center flex">
           <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
-            <img
-              alt="..."
-              className="w-full rounded-full align-middle border-none shadow-lg"
-              src={require("assets/img/team-1-800x800.jpg").default}
-            />
+            <i class="fas fa-user"></i>
           </span>
         </div>
       </a>
@@ -76,9 +90,9 @@ const UserDropdown = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={handleLogout}
         >
-          Seprated link
+          Cerrar sesión
         </a>
       </div>
     </>

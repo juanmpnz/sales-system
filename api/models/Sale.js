@@ -61,7 +61,8 @@ Sale.init(
             type: S.NUMBER,
             allowNull: false,
             defaultValue: 0
-        }
+        },
+ 
     },
     {
         sequelize: db,
