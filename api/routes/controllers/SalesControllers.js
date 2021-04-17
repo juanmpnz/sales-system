@@ -1,5 +1,20 @@
 const {Sale} = require("../../models");
 
+const deleteSale = async (req,res,next)=>{
+    Sale.destroy({where:{id:req.params.id}})
+    .then((deleted)=>{
+        res.sendStatus(200) 
+        
+    })
+    .catch((e)=>e)
+/*     console.log(req.params.id);
+    const id = req.params.id
+      const sal = await Sale.findAll({where:{id}})
+    console.log(sal);
+   return await sal.destroy();
+    res.status(202).send(sal)  */
+}
+
 const createSale = (req,res,next)=>{
 
     const {date,ticket,code,delivered,model,clientName,clientPhone,clientAddress,observations,paymentMethod,totalPrice,prePayment,restPay} = req.body
@@ -23,8 +38,12 @@ const createSale = (req,res,next)=>{
         }).catch((e)=>e)
     }
 
+
+
 module.exports = {
     createSale,
     getAll,
-    getIndividualSale
+    getIndividualSale,
+    deleteSale
+    
   };
